@@ -32,7 +32,18 @@
                                limit:HKObjectQueryNoLimit
                           completion:^(NSArray *results, NSError *error) {
                               if(results){
-                                  callback(@[[NSNull null], results]);
+                                  double activitySum = 0;
+
+                                  for (NSDictionary *item in results)
+                                  {
+                                      activitySum += [[item valueForKey:@"value"] doubleValue];
+                                  }
+                                  
+                                  NSDictionary *response = @{
+                                          @"total" : @(activitySum),
+                                  };
+
+                                  callback(@[[NSNull null], response]);
                                   return;
                               } else {
                                   callback(@[RCTJSErrorFromNSError(error)]);
