@@ -75,7 +75,7 @@
         if (completion) {
             NSMutableArray *data = [NSMutableArray arrayWithCapacity:1];
 
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
                 for (HKQuantitySample *sample in results) {
                     HKQuantity *quantity = sample.quantity;
